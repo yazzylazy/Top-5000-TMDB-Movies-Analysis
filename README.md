@@ -1,2 +1,4 @@
 # Top-5000-TMDB-Movies-Analysis
-In this exploratory data analysis project, we delve into a rich dataset comprising the top 5000 movies on TMDb. 
+In this exploratory data analysis project, we delve into a rich dataset comprising the top 5000 movies on TMDb. Our primary goal is to uncover insights and patterns in movie success and industry trends, with a focus on variables such as ratings, genres, director and actor influences, budget, and revenue. We begin by cleaning the dataset, addressing missing values and outliers, and normalizing data where necessary. Our analysis includes descriptive statistics to understand basic trends and distributions. We will employ visualizations to uncover relationships between key variables. A significant part of the analysis is devoted to genre trends over time, the correlation between budget and revenue, and factors contributing to high ratings. We are also thinking of implementing more advanced machine-learning concepts once we have physically implemented our project. 
+The goal of this project is to understand and provide an overview of trends within the top movies within the film industry.
+
