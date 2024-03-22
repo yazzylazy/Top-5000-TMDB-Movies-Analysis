@@ -18,7 +18,7 @@ USE `mydb` ;
 -- Table `mydb`.`Person`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Person` (
-  `person_id` INT NOT NULL AUTO_INCREMENT,
+  `person_id` VARCHAR(45) NOT NULL,
   `name` VARCHAR(45) NULL,
   `gender` VARCHAR(45) NULL,
   `role` VARCHAR(45) NULL,
@@ -54,7 +54,6 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`ProductionCountry` (
   `productionCountry_id` INT NOT NULL,
   `countryName` VARCHAR(45) NULL,
-  `continent` VARCHAR(45) NULL,
   PRIMARY KEY (`productionCountry_id`))
 ENGINE = InnoDB;
 
@@ -70,6 +69,47 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Movie` (
   `spoken_language` VARCHAR(45) NULL,
   `runtime` INT NULL,
   PRIMARY KEY (`movie_id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`ProductionStudio-Movie-bridgeTable`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`ProductionStudio-Movie-bridgeTable` (
+  `productionStudio_id` INT NULL,
+  `movie_id` INT NULL,
+  INDEX `fk_productionStudio_id_idx` (`productionStudio_id` ASC) VISIBLE,
+  INDEX `fk_productionStudio_movie_id_idx` (`movie_id` ASC) VISIBLE,
+  CONSTRAINT `fk_productionStudio_movie_id`
+    FOREIGN KEY (`movie_id`)
+    REFERENCES `mydb`.`Movie` (`movie_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_productionStudio_id`
+    FOREIGN KEY (`productionStudio_id`)
+    REFERENCES `mydb`.`ProductionStudio` (`productionStudio_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`ProductionCountry-Movie-bridgeTable`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`ProductionCountry-Movie-bridgeTable` (
+  `movie_id` INT NULL,
+  `productionCountry_id` INT NULL,
+  INDEX `fk_productionCountry_id_idx` (`productionCountry_id` ASC) VISIBLE,
+  CONSTRAINT `fk_productionCountry_movie_id`
+    FOREIGN KEY (`movie_id`)
+    REFERENCES `mydb`.`Movie` (`movie_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_productionCountry_id`
+    FOREIGN KEY (`productionCountry_id`)
+    REFERENCES `mydb`.`ProductionCountry` (`productionCountry_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -101,12 +141,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`MovieFactTable` (
     ON UPDATE NO ACTION,
   CONSTRAINT `productionStudio_id`
     FOREIGN KEY (`productionStudio_id`)
-    REFERENCES `mydb`.`ProductionStudio` (`productionStudio_id`)
+    REFERENCES `mydb`.`ProductionStudio-Movie-bridgeTable` (`productionStudio_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `productionCountry_id`
     FOREIGN KEY (`productionCountry_id`)
-    REFERENCES `mydb`.`ProductionCountry` (`productionCountry_id`)
+    REFERENCES `mydb`.`ProductionCountry-Movie-bridgeTable` (`productionCountry_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -117,7 +157,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Crew-Movie-bridgeTable` (
   `movie_id` INT NULL,
-  `crew_id` INT NULL,
+  `crew_id` VARCHAR(45) NULL,
   INDEX `movie_id_idx` (`movie_id` ASC) VISIBLE,
   INDEX `crew_id_idx` (`crew_id` ASC) VISIBLE,
   CONSTRAINT `crew_movie_id_fk`
@@ -138,7 +178,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Actor-Movie-bridgeTable` (
   `movie_id` INT NULL,
-  `actor_id` INT NULL,
+  `actor_id` VARCHAR(45) NULL,
   INDEX `movie_id_idx` (`movie_id` ASC) VISIBLE,
   INDEX `actor_id_idx` (`actor_id` ASC) VISIBLE,
   CONSTRAINT `actor_movie_id_fk`
