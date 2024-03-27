@@ -19,7 +19,7 @@ USE `mydb` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Person` (
   `person_id` VARCHAR(45) NOT NULL,
-  `name` VARCHAR(45) NULL,
+  `name` LONGTEXT NULL,
   `gender` VARCHAR(45) NULL,
   `role` VARCHAR(45) NULL,
   PRIMARY KEY (`person_id`))
@@ -43,7 +43,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`ProductionStudio` (
   `productionStudio_id` INT NOT NULL,
-  `companyName` VARCHAR(45) NULL,
+  `companyName` LONGTEXT NULL,
   PRIMARY KEY (`productionStudio_id`))
 ENGINE = InnoDB;
 
@@ -53,7 +53,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`ProductionCountry` (
   `productionCountry_id` INT NOT NULL,
-  `countryName` VARCHAR(45) NULL,
+  `countryName` LONGTEXT NULL,
   PRIMARY KEY (`productionCountry_id`))
 ENGINE = InnoDB;
 
@@ -63,10 +63,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Movie` (
   `movie_id` INT NOT NULL,
-  `title` VARCHAR(45) NULL,
-  `genre` VARCHAR(45) NULL,
-  `original_language` VARCHAR(45) NULL,
-  `spoken_language` VARCHAR(45) NULL,
+  `title` LONGTEXT NULL,
+  `genre` LONGTEXT NULL,
+  `original_language` LONGTEXT NULL,
+  `spoken_language` LONGTEXT NULL,
   `runtime` INT NULL,
   PRIMARY KEY (`movie_id`))
 ENGINE = InnoDB;
@@ -100,6 +100,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ProductionCountry-Movie-bridgeTable` (
   `movie_id` INT NULL,
   `productionCountry_id` INT NULL,
   INDEX `fk_productionCountry_id_idx` (`productionCountry_id` ASC) VISIBLE,
+  INDEX `fk_productionCountry_movie_id_idx` (`movie_id` ASC) VISIBLE,
   CONSTRAINT `fk_productionCountry_movie_id`
     FOREIGN KEY (`movie_id`)
     REFERENCES `mydb`.`Movie` (`movie_id`)
