@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`ReleaseDate` (
   `day` INT NULL,
   `month` INT NULL,
   `year` INT NULL,
+  'quarter' MEDIUMTEXT NULL,
   PRIMARY KEY (`date_id`))
 ENGINE = InnoDB;
 
@@ -54,6 +55,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `mydb`.`ProductionCountry` (
   `productionCountry_id` INT NOT NULL,
   `countryName` LONGTEXT NULL,
+  'continentName' LONGTEXT NULL,
   PRIMARY KEY (`productionCountry_id`))
 ENGINE = InnoDB;
 
