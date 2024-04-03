@@ -131,6 +131,7 @@ FROM MovieFactTable f, Movie m, `ProductionStudio-Movie-bridgeTable` sb, Product
 WHERE f.movie_id = m.movie_id AND f.movie_id = sb.movie_id AND sb.productionStudio_id = s.productionStudio_id;
 
 	/* Windowing Clause */
+-- Moving average of profit by production studio over time
 SELECT s.companyName, d.year, AVG(f.revenue - f.budget) OVER W AS company_moving_average
 FROM MovieFactTable f, ReleaseDate d, `ProductionStudio-Movie-bridgeTable` sb, ProductionStudio s
 WHERE f.date_id = d.date_id AND f.movie_id = sb.movie_id AND sb.productionStudio_id = s.productionStudio_id

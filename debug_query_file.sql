@@ -11,5 +11,9 @@ USE mydb;
 -- DELETE FROM Movie;
 -- SELECT * FROM MovieFactTable;
 -- SHOW FULL PROCESSLIST;
+-- SELECT * FROM ProductionCountry;
 
-SELECT * FROM ReleaseDate WHERE year = 2010
+SELECT * FROM `Actor-Movie-bridgeTable`;
+SELECT * FROM Person;
+SELECT * FROM MovieFactTable;
+-- SELECT * FROM ReleaseDate WHERE year = 2010
